@@ -1,4 +1,7 @@
 %% Advection-Diffusion on Square Domain
+%All diffusion is drawn directly from
+%https://www.math.hu-berlin.de/~cc/cc_homepage/download/1999-AJ_CC_FS-50_Lines_of_Matlab.pdf
+%advection code is also inspired by this source.
 clear; clc;
 x=linspace(0,10,40);
 y=linspace(0,10,40);
