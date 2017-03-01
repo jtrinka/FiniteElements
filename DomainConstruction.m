@@ -60,7 +60,9 @@ save('saveysizemax.mat','saveysizemax')
    
  end
  
+
  save('neumann.mat','neumann')
+ 
  
  myvec2=zeros(length(mychosenpointsDirichlet(:,1)));
  for i=1:max(nodes(:))

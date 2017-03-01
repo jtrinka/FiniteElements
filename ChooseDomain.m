@@ -19,7 +19,7 @@ A=imread('domain.png');
 imshow(A)
 clc;
 fprintf('Click to choose Neumann nodes of domain. \n You will warned when the next chosen point will be a Dirichlet point. \n Then you will be warned again when the next chosen point will be Interior')
-numberofpoints=10;
+numberofpoints=200;
 xNeumann = zeros(numberofpoints,1);
 yNeumann = zeros(numberofpoints,1);
 NeumannCounter=0;
@@ -29,7 +29,7 @@ for n=1:numberofpoints
     plot(x,y,'r*')
     xNeumann(n,1)=x;
     yNeumann(n,1)=y;
-    NeumannCounter=n;
+    NeumannCounter=n
     
     if NeumannCounter+3==numberofpoints
        fprintf('\n Three Chosen Points until the next chosen point will be a Dirichlet Point')
@@ -68,10 +68,10 @@ Dirichletpoints=[xDirichlet,yDirichlet];
 mychosenpointsDirichlet=Dirichletpoints;
 %save as a .mat file
 save('mychosenpointsDirichlet.mat','mychosenpointsDirichlet');
-
+%%
 % A=imread('domain.png');
 % imshow(A)
-numberofpoints=10;
+numberofpoints=900;
 xInterior = zeros(numberofpoints,1);
 yInterior = zeros(numberofpoints,1);
 InteriorCounter=0;
