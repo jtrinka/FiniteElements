@@ -35,21 +35,21 @@ load savexsizeminsecondmesh.mat
 load saveysizeminsecondmesh.mat
 load savexsizemaxsecondmesh.mat
 load saveysizemaxsecondmesh.mat
-load plotusecondmesh.mat
-load plotvsecondmesh.mat
-load myxysecondmesh.mat
+load plotuprog.mat
+load plotvprog.mat
+load myxysecondmesh.mat %need the proper mesh you dumbshit
 
-neumann1=neumann(1:125,:);
-neumann2=neumann(130:end,:);
-Dirich1=neumann(126:129,:);
-Dirich=[Dirich;Dirich1];
-neumann=[neumann1;neumann2];
+% neumann1=neumann(1:122,:);
+% neumann2=neumann(130:end,:);
+% Dirich1=neumann(123:129,:);
+% Dirich=[Dirich;Dirich1];
+% neumann=[neumann1;neumann2];
 
 
 myvelocities=[reshape(plotu',length(plotu(:,1))^2,1),reshape(plotv',length(plotv(:,1))^2,1)];
 nNodes=unique(nodes);
 v=zeros(length(nNodes(:,1)),2);
-epsilon=5;
+epsilon=20;
 for i=1:length(nNodes)
     for j=1:length(myxy(:,1))
         if abs(xy(i,1)-myxy(j,1))<epsilon && abs(xy(i,2)-myxy(j,2))<epsilon
@@ -59,19 +59,18 @@ for i=1:length(nNodes)
         
     end
 end
-v=v*(1/300);
+v=v/10;
 
 %Initial Condition, velocity vector field, diffusivity term, maximum time
 %to run, and time step
-constant = (1/(sqrt(2*pi)^2*170));
-f=@(x,y) 0*constant*exp(-.0001*(x-375).^2-.0001*(y-290).^2);
+constant = (1/(sqrt(2*pi)^2*2));
+f=@(x,y) constant*exp(-.0005*(x-200).^2-.0005*(y-400).^2);
 %v=[-20;0];
 %try high diffusivity with the neumann boundary condition pulling shit out
 %on the left
-D=1000;
-T=200; dt=.01;
+D=10^-1; %D=10 and v=v*(1/2300) works with only point source Gaussian
+T=5000; dt=.01;
 AdvectionDiffusionFiniteElements(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt)
-
 
 
 

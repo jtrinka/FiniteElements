@@ -20,8 +20,8 @@ dx=x(2)-x(1);
 y = linspace(0,yrange,ypoints+2);
 dy=y(2)-y(1);
 %The dt has to make sense
-dt =sqrt(dx^2+dy^2)/340/2/30; % seconds; % seconds
-tpoints = 80000;%ceil(tmax / dt) + 1;
+dt =3e-2;%sqrt(dx^2+dy^2)/340/2/30; % seconds; % seconds
+tpoints = 120000;%ceil(tmax / dt) + 1;
 [X,Y] = meshgrid(x,y);
 checkx=X(1:end)';
 checky=Y(1:end)';
@@ -247,7 +247,7 @@ v(33:38,101,k+1)=-u0;
     quiver(X,Y,plotu',plotv',1);
     title((k+1)*dt);
     drawnow;
-    if k==10000 || k==20000 || k==30000 || k==40000 || k==50000 || k==60000 || k==70000 || k==80000
+    if k==10000 || k==20000 || k==30000 || k==40000 || k==50000 || k==60000 || k==70000 || k==80000 || k==100000
         
 save('plotu.mat','plotu')
 save('plotv.mat','plotv')

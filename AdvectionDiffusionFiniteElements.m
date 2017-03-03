@@ -68,23 +68,23 @@ Conservation(1,1)=sum(U(:,1));
     b=b+B*U(:,n-1);
     %Dirichlet Conditions
     u=sparse(size(xy,1),1);
-    u(unique(Dirich(end-3:end,:))) = u_d(xy(unique(Dirich(end-3:end,:)),:),n*dt);
-    u(unique(Dirich(1:end-4,:))) = u_dz(xy(unique(Dirich(1:end-4,:)),:),n*dt);
+    u(unique(Dirich(end-8:end,:))) = u_d(xy(unique(Dirich(end-8:end,:)),:),n*dt);
+    u(unique(Dirich(1:end-7,:))) = u_dz(xy(unique(Dirich(1:end-7,:)),:),n*dt);
     b=b-(dt*D*A+B-dt*C)*u;
     %computation of solution
     u(Freenodes)=(dt*D*A(Freenodes,Freenodes)+B(Freenodes,Freenodes)-dt*C(Freenodes,Freenodes))\b(Freenodes);
     U(:,n)=u;
     Conservation(n,1)=sum(U(:,n));
-      image=imread('domain.png');
-   imshow(image)
-   hold on
+          image=imread('domain.png');
+      imshow(image)
+       hold on
   trisurf(nodes,xy(:,1),xy(:,2),U(:,n))
   title(dt*n)
   axis([savexsizemin,savexsizemax,saveysizemin,saveysizemax,0,1])
-  view(2)
-  colormap jet
+      view(2)
+   colormap jet
   drawnow;
-    hold off
+        hold off
  end
  figure
 plot(Conservation)
