@@ -10,7 +10,7 @@
 %due to chosen triangularization. The user will need to adjust their
 %domain triangulation, initial conditions, and other parameters to get a
 %a good numerical solution on a specified domain.
-function [EndVec] = AdvectionDiffusionFiniteElements(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt)
+function [EndVec] = AdvectionDiffusionFiniteElementsC(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt)
 
 N=T/dt;
 
@@ -70,8 +70,8 @@ Conservation(1,1)=sum(U(:,1));
     b=b+B*U(:,n-1);
     %Dirichlet Conditions
     u=sparse(size(xy,1),1);
-    %u(unique(Dirich)) = u_d(xy(unique(Dirich),:),n*dt);
-    u(unique(Dirich)) = u_dz(xy(unique(Dirich),:),n*dt);
+    u(unique(Dirich(7:end,:))) = u_d(xy(unique(Dirich(7:end,:)),:),n*dt);
+    u(unique(Dirich(1:end-8,:))) = u_dz(xy(unique(Dirich(1:end-8,:)),:),n*dt);
     b=b-(dt*D*A+B-dt*C)*u;
     %computation of solution
     u(Freenodes)=(dt*D*A(Freenodes,Freenodes)+B(Freenodes,Freenodes)-dt*C(Freenodes,Freenodes))\b(Freenodes);

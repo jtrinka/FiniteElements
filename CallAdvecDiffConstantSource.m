@@ -39,11 +39,11 @@ load plotu3mpers.mat
 load plotv3mpers.mat
 load myxysecondmesh.mat
 
-% neumann1=neumann(1:122,:);
-% neumann2=neumann(130:end,:);
-% Dirich1=neumann(123:129,:);
-% Dirich=[Dirich;Dirich1];
-% neumann=[neumann1;neumann2];
+neumann1=neumann(1:122,:);
+neumann2=neumann(130:end,:);
+Dirich1=neumann(123:129,:);
+Dirich=[Dirich;Dirich1];
+neumann=[neumann1;neumann2];
 
 myvelocities=[reshape(plotu',length(plotu(:,1))^2,1),reshape(plotv',length(plotv(:,1))^2,1)];
 nNodes=unique(nodes);
@@ -63,18 +63,18 @@ v=v/10;%v/6000;
 %Initial Condition, velocity vector field, diffusivity term, maximum time
 %to run, and time step
 constant = (1/(sqrt(2*pi)^2*2));
-f=@(x,y) constant*exp(-.0002*(x-200).^2-.0002*(y-400).^2);
+f=@(x,y) constant*exp(-.0005*(x-330).^2-.0005*(y-305).^2);
 %v=[-20;0];
 %try high diffusivity with the neumann boundary condition pulling shit out
 %on the left
 %Diffusivity is when water is at 22 degrees celcius
 D=1;%1.13e-3/24/60/60; %1;%http://www.isn.ucsd.edu/courses/beng221/problems/2012/BENG221_Project%20-%20Ao-Ieong%20Change%20Gu.pdf,D=10 and v=v*(1/2300) works with only point source Gaussian
-T=230; dt=.1;
-MyFirstEndVec=AdvectionDiffusionFiniteElements(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
+T=560; dt=.1;
+MyFirstEndVecConstant=AdvectionDiffusionFiniteElementsConstant(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
 
 
 %% CallAdvectionDiffusion.m code
-clearvars -except MyFirstEndVec; clc;
+clearvars -except MyFirstEndVecConstant; clc;
 %This code loads a domain that is created by the user from using the
 %ChooseDomain.m and DomainConstruction.m files. It then runs the domain
 %through the AdvectionDiffusionFiniteElements.m code. In order to get access to
@@ -114,11 +114,12 @@ load plotu3mpers.mat
 load plotv3mpers.mat
 load myxysecondmesh.mat
 
-% neumann1=neumann(1:122,:);
-% neumann2=neumann(130:end,:);
-% Dirich1=neumann(123:129,:);
-% Dirich=[Dirich;Dirich1];
-% neumann=[neumann1;neumann2];
+neumann1=neumann(1:122,:);
+neumann2=neumann(130:end,:);
+Dirich1=neumann(123:129,:);
+Dirich=[Dirich;Dirich1];
+neumann=[neumann1;neumann2];
+
 
 myvelocities=[reshape(plotu',length(plotu(:,1))^2,1),reshape(plotv',length(plotv(:,1))^2,1)];
 nNodes=unique(nodes);
@@ -138,19 +139,19 @@ v=v/10;%v/6000;
 %Initial Condition, velocity vector field, diffusivity term, maximum time
 %to run, and time step
 constant = (1/(sqrt(2*pi)^2*2));
-f=@(x,y) constant*exp(-.0002*(x-200).^2-.0002*(y-400).^2);
+f=@(x,y) constant*exp(-.0005*(x-330).^2-.0005*(y-305).^2);;
 %v=[-20;0];
 %try high diffusivity with the neumann boundary condition pulling shit out
 %on the left
 %Diffusivity is when water is at 22 degrees celcius
 D=1;%1.13e-3/24/60/60; %1;%http://www.isn.ucsd.edu/courses/beng221/problems/2012/BENG221_Project%20-%20Ao-Ieong%20Change%20Gu.pdf,D=10 and v=v*(1/2300) works with only point source Gaussian
-T=230; dt=.01;
-MySecondEndVec=AdvectionDiffusionFiniteElements(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
+T=560; dt=.01;
+MySecondEndVecConstant=AdvectionDiffusionFiniteElementsConstant(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
 
 
 
 %% CallAdvectionDiffusion.m code
-clearvars -except MyFirstEndVec MySecondEndVec; clc;
+clearvars -except MyFirstEndVecConstant MySecondEndVecConstant; clc;
 %This code loads a domain that is created by the user from using the
 %ChooseDomain.m and DomainConstruction.m files. It then runs the domain
 %through the AdvectionDiffusionFiniteElements.m code. In order to get access to
@@ -190,11 +191,11 @@ load plotu3mpers.mat
 load plotv3mpers.mat
 load myxysecondmesh.mat
 
-% neumann1=neumann(1:122,:);
-% neumann2=neumann(130:end,:);
-% Dirich1=neumann(123:129,:);
-% Dirich=[Dirich;Dirich1];
-% neumann=[neumann1;neumann2];
+neumann1=neumann(1:122,:);
+neumann2=neumann(130:end,:);
+Dirich1=neumann(123:129,:);
+Dirich=[Dirich;Dirich1];
+neumann=[neumann1;neumann2];
 
 myvelocities=[reshape(plotu',length(plotu(:,1))^2,1),reshape(plotv',length(plotv(:,1))^2,1)];
 nNodes=unique(nodes);
@@ -214,18 +215,18 @@ v=v/10;%v/6000;
 %Initial Condition, velocity vector field, diffusivity term, maximum time
 %to run, and time step
 constant = (1/(sqrt(2*pi)^2*2));
-f=@(x,y) constant*exp(-.0002*(x-200).^2-.0002*(y-400).^2);
+f=@(x,y) constant*exp(-.0005*(x-330).^2-.0005*(y-305).^2);
 %v=[-20;0];
 %try high diffusivity with the neumann boundary condition pulling shit out
 %on the left
 %Diffusivity is when water is at 22 degrees celcius
 D=1;%1.13e-3/24/60/60; %1;%http://www.isn.ucsd.edu/courses/beng221/problems/2012/BENG221_Project%20-%20Ao-Ieong%20Change%20Gu.pdf,D=10 and v=v*(1/2300) works with only point source Gaussian
-T=230; dt=.001;
-MyThirdEndVec=AdvectionDiffusionFiniteElements(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
+T=560; dt=.001;
+MyThirdEndVecConstant=AdvectionDiffusionFiniteElementsConstant(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
 
 
 %% CallAdvectionDiffusion.m code
-clearvars -except MyFirstEndVec MySecondEndVec MyThirdEndVec; clc;
+clearvars -except MyFirstEndVecConstant MySecondEndVecConstant MyThirdEndVecConstant; clc;
 %This code loads a domain that is created by the user from using the
 %ChooseDomain.m and DomainConstruction.m files. It then runs the domain
 %through the AdvectionDiffusionFiniteElements.m code. In order to get access to
@@ -265,11 +266,11 @@ load plotu3mpers.mat
 load plotv3mpers.mat
 load myxysecondmesh.mat
 
-% neumann1=neumann(1:122,:);
-% neumann2=neumann(130:end,:);
-% Dirich1=neumann(123:129,:);
-% Dirich=[Dirich;Dirich1];
-% neumann=[neumann1;neumann2];
+neumann1=neumann(1:122,:);
+neumann2=neumann(130:end,:);
+Dirich1=neumann(123:129,:);
+Dirich=[Dirich;Dirich1];
+neumann=[neumann1;neumann2];
 
 myvelocities=[reshape(plotu',length(plotu(:,1))^2,1),reshape(plotv',length(plotv(:,1))^2,1)];
 nNodes=unique(nodes);
@@ -289,13 +290,13 @@ v=v/10;%v/6000;
 %Initial Condition, velocity vector field, diffusivity term, maximum time
 %to run, and time step
 constant = (1/(sqrt(2*pi)^2*2));
-f=@(x,y) constant*exp(-.0002*(x-200).^2-.0002*(y-400).^2);
+f=@(x,y) constant*exp(-.0005*(x-330).^2-.0005*(y-305).^2);
 %v=[-20;0];
 %try high diffusivity with the neumann boundary condition pulling shit out
 %on the left
 %Diffusivity is when water is at 22 degrees celcius
 D=1;%1.13e-3/24/60/60; %1;%http://www.isn.ucsd.edu/courses/beng221/problems/2012/BENG221_Project%20-%20Ao-Ieong%20Change%20Gu.pdf,D=10 and v=v*(1/2300) works with only point source Gaussian
 T=230; dt=.0001;
-MyFourthEndVec=AdvectionDiffusionFiniteElements(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
+MyFourthEndVecConstant=AdvectionDiffusionFiniteElementsConstant(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
 
 

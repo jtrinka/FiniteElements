@@ -5,6 +5,6 @@ function DirichletBoundaryValue = u_d(x,t)
     %DirichletBoundaryValue = 0.00085*ones(size(x,1),1);
 % else
 %     DirichletBoundaryValue = zeros(size(x,1),1);
-DirichletBoundaryValue = 0*0.08*ones(size(x,1),1);    
+DirichletBoundaryValue = .07*ones(size(x,1),1);    
     
 end
