@@ -1,5 +1,5 @@
 %% CallAdvectionDiffusion.m code
-clear; clc;
+% clear; clc;
 %This code loads a domain that is created by the user from using the
 %ChooseDomain.m and DomainConstruction.m files. It then runs the domain
 %through the AdvectionDiffusionFiniteElements.m code. In order to get access to
@@ -38,6 +38,18 @@ load saveysizemaxsecondmesh.mat
 load plotu3mpers.mat
 load plotv3mpers.mat
 load myxysecondmesh.mat
+%%
+
+count=0;
+for i=1:length(xy(:,1))
+    
+   if abs(xy(i,1)-150)<5
+      count=count+1;
+       wall(count,1)=i;
+    
+   end
+
+end
 
 neumann1=neumann(1:122,:);
 neumann2=neumann(130:end,:);
@@ -69,8 +81,8 @@ f=@(x,y) constant*exp(-.0005*(x-330).^2-.0005*(y-305).^2);
 %on the left
 %Diffusivity is when water is at 22 degrees celcius
 D=1;%1.13e-3/24/60/60; %1;%http://www.isn.ucsd.edu/courses/beng221/problems/2012/BENG221_Project%20-%20Ao-Ieong%20Change%20Gu.pdf,D=10 and v=v*(1/2300) works with only point source Gaussian
-T=560; dt=.1;
-MyFirstEndVecConstant=AdvectionDiffusionFiniteElementsConstant(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
+T=1000; dt=.1;
+WallConst10Inc=AdvectionDiffusionFiniteElementsConstant(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D+.1*D,T,dt,wall);
 
 
 %% CallAdvectionDiffusion.m code
@@ -296,7 +308,24 @@ f=@(x,y) constant*exp(-.0005*(x-330).^2-.0005*(y-305).^2);
 %on the left
 %Diffusivity is when water is at 22 degrees celcius
 D=1;%1.13e-3/24/60/60; %1;%http://www.isn.ucsd.edu/courses/beng221/problems/2012/BENG221_Project%20-%20Ao-Ieong%20Change%20Gu.pdf,D=10 and v=v*(1/2300) works with only point source Gaussian
-T=230; dt=.0001;
+T=560; dt=.0001;
 MyFourthEndVecConstant=AdvectionDiffusionFiniteElementsConstant(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
+save('MyFourthEndVecConstant.mat','MyFourthEndVecConstant')
 
-
+%%
+clear; clc;
+load WallConst10Inc
+load WallConst10Dec
+load WallConstNoChange
+plot(WallConstNoChange)
+  hold on
+  plot(WallConst10Dec)
+ hold on
+plot(WallConst10Inc)
+title('Contaminant Flow through a Wall that Encloses 145 < x < 155')
+xlabel('Time-Step (n)')
+ylabel('Concentration of Contaminant (kg per square meter)')
+legend D=1 D=0.9 D=1.1
+deltx=WallConst10Dec(5900,1)-WallConstNoChange(5900,1);
+deltr=-0.1;
+Sens=(deltx*.9)/(WallConst10Dec(5900,1)*deltr)

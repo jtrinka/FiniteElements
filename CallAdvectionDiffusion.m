@@ -38,7 +38,16 @@ load saveysizemaxsecondmesh.mat
 load plotu3mpers.mat
 load plotv3mpers.mat
 load myxysecondmesh.mat
+count=0;
+for i=1:length(xy(:,1))
+    
+   if abs(xy(i,1)-150)<5
+      count=count+1;
+       wall(count,1)=i;
+    
+   end
 
+end
 % neumann1=neumann(1:122,:);
 % neumann2=neumann(130:end,:);
 % Dirich1=neumann(123:129,:);
@@ -69,8 +78,8 @@ f=@(x,y) constant*exp(-.0002*(x-200).^2-.0002*(y-400).^2);
 %on the left
 %Diffusivity is when water is at 22 degrees celcius
 D=1;%1.13e-3/24/60/60; %1;%http://www.isn.ucsd.edu/courses/beng221/problems/2012/BENG221_Project%20-%20Ao-Ieong%20Change%20Gu.pdf,D=10 and v=v*(1/2300) works with only point source Gaussian
-T=230; dt=.1;
-MyFirstEndVec=AdvectionDiffusionFiniteElements(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
+T=800; dt=.1;
+WallPoint10Dec=AdvectionDiffusionFiniteElements(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D-.1*D,T,dt,wall);
 
 
 %% CallAdvectionDiffusion.m code
@@ -297,5 +306,22 @@ f=@(x,y) constant*exp(-.0002*(x-200).^2-.0002*(y-400).^2);
 D=1;%1.13e-3/24/60/60; %1;%http://www.isn.ucsd.edu/courses/beng221/problems/2012/BENG221_Project%20-%20Ao-Ieong%20Change%20Gu.pdf,D=10 and v=v*(1/2300) works with only point source Gaussian
 T=230; dt=.0001;
 MyFourthEndVec=AdvectionDiffusionFiniteElements(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt);
+save('MyFourthEndVec.mat','MyFourthEndVec')
 
-
+%% Wall at 145 to 155
+clear; clc;
+load WallPoint10Inc
+load WallPoint10Dec
+load WallPointNoChange
+plot(WallPointNoChange)
+  hold on
+  plot(WallPoint10Dec)
+ hold on
+plot(WallPoint10Inc)
+title('Contaminant Flow through a Wall that Encloses 145 < x < 155')
+xlabel('Time-Step (n)')
+ylabel('Concentration of Contaminant (kg per square meter)')
+legend D=1 D=0.9 D=1.1
+ deltx=WallPoint10Inc(1900,1)-WallPointNoChange(1900,1);
+ deltr=0.1;
+ Sens=(deltx*1.1)/(WallPoint10Inc(1900,1)*deltr)

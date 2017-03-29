@@ -10,7 +10,7 @@
 %due to chosen triangularization. The user will need to adjust their
 %domain triangulation, initial conditions, and other parameters to get a
 %a good numerical solution on a specified domain.
-function [EndVec] = AdvectionDiffusionFiniteElements(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt)
+function [Wall] = AdvectionDiffusionFiniteElements(xy,nodes,neumann,Dirich,savexsizemin,saveysizemin,savexsizemax,saveysizemax,f,v,D,T,dt,wall)
 
 N=T/dt;
 
@@ -49,8 +49,10 @@ end
 %Initial Condition
 U(:,1) = f(x,y);%zeros(size(xy,1),1);
 %Conservation of Contaminant
-Conservation=zeros(N,1);
-Conservation(1,1)=sum(U(:,1));
+%Conservation=zeros(N,1);
+%Conservation(1,1)=sum(U(:,1));
+Wall=zeros(N,1);
+Wall(1,1) = sum(U(wall(:,1),1));
 %time steps
  for n=2:N+1
      b=sparse(size(xy,1),1);
@@ -76,30 +78,38 @@ Conservation(1,1)=sum(U(:,1));
     %computation of solution
     u(Freenodes)=(dt*D*A(Freenodes,Freenodes)+B(Freenodes,Freenodes)-dt*C(Freenodes,Freenodes))\b(Freenodes);
     U(:,n)=u;
-    Conservation(n,1)=sum(U(:,n));
-          image=imread('domain.png');
-       imshow(image)
-        hold on
-  trisurf(nodes,xy(:,1),xy(:,2),U(:,n))
-  title(dt*n)
-  axis([savexsizemin,savexsizemax,saveysizemin,saveysizemax,0,1])
-        view(2)
-   colormap jet
-  drawnow;
-%   if n==430000 || n==200000 || n==100000 || n==50000
+    Wall(n,1)=sum(U(wall(:,1),n));
+    %Conservation(n,1)=sum(U(:,n));
+%           image=imread('domain.png');
+%        imshow(image)
+%         hold on
+%   trisurf(nodes,xy(:,1),xy(:,2),U(:,n))
+%   title(['t=',num2str(dt*n),'s'])
+%   xlabel('Horizontal Distance (meters)')
+%   ylabel('Vertical Distance (meters)')
+%   axis([savexsizemin,savexsizemax,saveysizemin,saveysizemax,0,1])
+%         view(2)
+%    colormap jet
+%  h = colorbar;
+% ylabel(h, 'Concentration of Contaminant (kg per square meter)')
+%   drawnow;
+%   if n==2 || n==500 || n==1000 || n==2000 || n==2300
 % frame = getframe(1);
 %   im = frame2im(frame);
 %   [Matrix,map] = rgb2ind(im,256);
-%   Animationpic = sprintf('mathy_img_%d.png', n) ;
+%   Animationpic = sprintf('mathpoint_img_%d.png', n) ;
 %  imwrite(Matrix,map, Animationpic, 'png');
 %     
 %   end
 
-  hold off
+%   hold off
  end
  EndVec=U(:,end); 
  
  figure
-plot(Conservation)
+plot(Wall)
+title('Contaminant Flow through Node 200')
+xlabel('Time-Step (n)')
+ylabel('Concentration of Contaminant (kg per square meter)')
 end
 

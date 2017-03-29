@@ -1,8 +1,8 @@
 %% Navier-Stokes from Cline
 % at y = 0, yrange, all velocities = 0, due to boundaries
-clear all
-clc
-clf
+% clear all
+% clc
+% clf
 % load neumannfirstmesh.mat
 % load xyfirstmesh.mat
 load neumannsecondmesh.mat
@@ -23,6 +23,7 @@ dy=y(2)-y(1);
 dt =3e-2;%sqrt(dx^2+dy^2)/340/2/30; % seconds; % seconds
 tpoints = 120000;%ceil(tmax / dt) + 1;
 [X,Y] = meshgrid(x,y);
+%%
 checkx=X(1:end)';
 checky=Y(1:end)';
 myxy=[checkx,checky];
@@ -245,14 +246,14 @@ v(33:38,101,k+1)=-u0;
    hold on
 
     quiver(X,Y,plotu',plotv',1);
-    title((k+1)*dt);
+    %title((k+1)*dt);
     drawnow;
-    if k==10000 || k==20000 || k==30000 || k==40000 || k==50000 || k==60000 || k==70000 || k==80000 || k==100000
+    if k==1 || k==10000 || k==20000 || k==30000 || k==40000 || k==50000 || k==60000 || k==70000 || k==80000 || k==100000
         
-save('plotu.mat','plotu')
-save('plotv.mat','plotv')
-save('myxy.mat','myxy')
-        
+save('plotuinit.mat','plotu')
+save('plotvinit.mat','plotv')
+save('myxyinit.mat','myxy')
+        break;
     end
        hold off
 end
