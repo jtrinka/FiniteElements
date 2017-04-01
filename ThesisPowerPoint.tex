@@ -69,28 +69,30 @@
 
 \begin{frame}{Purpose} \label{Purpose}
 \begin{itemize}
-\item Deepwater Horizon spill of April, 2010
-\item Predictive analysis
-\item Clean up cost
-\item Clean up time
-\item Environmental Protection
+\item<1-> Deepwater Horizon spill of April, 2010
+\item<2-> Predictive analysis
+\item<3-> Clean up cost
+\item<4-> Clean up time
+\item<5->Environmental Protection
 \end{itemize}
+\onslide<6->
 \hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
 \section{The Advection-Diffusion Equation} 
 \begin{frame}{Advection-Diffusion Equation}\label{The Advection-Diffusion Equation}
-\begin{equation}
+\begin{equation}\onslide<1->
 \frac{\partial u}{\partial t}= D\Delta u + \underline{v} \cdot \underline{\nabla}u+f
 \end{equation}
 \begin{itemize}
-\item $u \in  H^{1}\left(\Omega \right)$
-\item $\frac{\partial u}{\partial t} \rightarrow$ Change in concentration with respect to time
-\item $\Delta u \rightarrow$ Diffusivity term
-\item $D \rightarrow$ Coefficient of diffusion
-\item $\underline{v} \cdot \underline{\nabla}u \rightarrow$ Advective term
-\item $f \rightarrow$ Forcing function 
+\item <2->$u \in  H^{1}\left(\Omega \right)$
+\item <3->$\frac{\partial u}{\partial t} \rightarrow$ Change in concentration with respect to time
+\item <4->$\Delta u \rightarrow$ Diffusivity term
+\item <5->$D \rightarrow$ Coefficient of diffusion
+\item<6->$\underline{v} \cdot \underline{\nabla}u \rightarrow$ Advective term
+\item <7->$f \rightarrow$ Forcing function 
 \end{itemize}
+\onslide<8->
 \hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
@@ -98,35 +100,36 @@
 \begin{frame}{Implict Euler Step and the Weak Form}  \label{EulerandWeak}
 
 \begin{itemize}
-\item Implicit in time Euler Step
+\item<1-> Implicit in time Euler Step
 \end{itemize}
 \footnotesize
-\begin{equation}
+\begin{equation}\onslide<2->
 \frac{U^{n}-U^{n-1}}{dt}=D\Delta U^{n}+\underline{v} \cdot \underline{\nabla}U^{n}
 \end{equation}
 
-\begin{equation}
+\begin{equation} \onslide<3->
 U^{n}-dtD\Delta U^{n}-dt\underline{v}\cdot \underline{\nabla}U^{n}=U^{n-1}.
 \end{equation}
 \normalsize
 \begin{itemize}
-\item Deriving the Weak Form
+\item<4-> Deriving the Weak Form
 \end{itemize}
 \footnotesize
-\begin{equation}
+\begin{equation}\onslide<5->
 \int_{\Omega}U^{n}W dx -dtD \int_{\Omega}\Delta U^{n}W dx-dt\int_{\Omega}\left(\underline{v}\cdot \underline{\nabla}U^{n}\right)W dx=\int_{\Omega} U^{n-1}W dx
 \end{equation}
 
 \begin{itemize}
-\item $W \in H^{1}\left({\Omega}\right)$
-\item $\Omega \rightarrow$ Domain
-\item $g^{n}=\frac{\partial U^{n}}{\partial n}=0$ where $n$ is the normal to $\Gamma_{N}$
+\item<6-> $W \in H^{1}\left({\Omega}\right)$
+\item<7-> $\Omega \rightarrow$ Domain
+\item<8-> $g^{n}=\frac{\partial U^{n}}{\partial n}=0$ where $n$ is the normal to $\Gamma_{N}$
 \end{itemize}
 
-\begin{equation}
+\begin{equation}\onslide<9->
 \int_{\Omega}U^{n}W dx +dtD\int_{\Omega}\underline{\nabla}W \cdot \underline{\nabla} U^{n} dx-dt\int_{\Omega}\left(\underline{v}\cdot \underline{\nabla}U^{n}\right)W dx=dtD\int_{\Gamma_{N}}g^{n}W ds+ \int_{\Omega} U^{n-1}W dx.
 \end{equation}
 \normalsize
+\onslide<10->
 \hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
@@ -134,9 +137,9 @@ U^{n}-dtD\Delta U^{n}-dt\underline{v}\cdot \underline{\nabla}U^{n}=U^{n-1}.
 \section{Application of the Finite Element Method}
 \begin{frame}{Creation of Basis Functions and Finite Element Discretization} \label{basisfunctionandfinite}
 \begin{itemize}
-\item Define the following basis functions
+\item<1-> Define the following basis functions
 \end{itemize}
-$$
+$$\onslide<2->
 \eta_{k}\left(x_{i},y_{j}\right)=\begin{cases}
 1 \texttt{ if } i,j=k\\
 0 \texttt{ if } i,j \neq k \texttt{ for } i,j,k=1,...,N
@@ -144,25 +147,26 @@ $$
 $$
 
 \begin{itemize}
-\item Express $U^{n}$ and $W$ as a linear combination of basis functions
+\item<3-> Express $U^{n}$ and $W$ as a linear combination of basis functions
 \end{itemize}
 
-\begin{eqnarray}\label{UWdiscrete}
+\begin{eqnarray}\label{UWdiscrete}\onslide<4->
 U^{n}\left(x,y\right)&=&\sum_{i=1}^{N}\xi_{i}\eta_{i}\left(x,y\right), \texttt{ } x,y \in \Omega \\
 \nonumber
 W\left(x,y\right)&=&\sum_{j=1}^{N}\beta_{j}\eta_{j}\left(x,y\right), \texttt{ } x,y \in \Omega
 \end{eqnarray}
 
 \begin{itemize}
-\item $\xi_{i}=U^{n}\left(x_{i},y_{i}\right)$
-\item $\beta_{j}=W^{n}\left(x_{j},y_{j}\right)$
+\item<5-> $\xi_{i}=U^{n}\left(x_{i},y_{i}\right)$
+\item<6-> $\beta_{j}=W\left(x_{j},y_{j}\right)$
 \end{itemize}
+\onslide<7->
 \hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
 \begin{frame}{Applying the Finite Element Discretizations to the Weak Form} \label{applyingFEMtoweakform}
 \begin{itemize}
-\item Consider again
+\item<1-> Consider again
 \end{itemize}
 \footnotesize
 \begin{equation}
@@ -170,133 +174,137 @@ W\left(x,y\right)&=&\sum_{j=1}^{N}\beta_{j}\eta_{j}\left(x,y\right), \texttt{ } 
 \end{equation}
 \normalsize
 \begin{itemize}
-\item Apply F.E.M. to $\int_{\Omega}\underline{\nabla}W \cdot \underline{\nabla} U^{n} dx$
+\item<2-> Apply F.E.M. to $\int_{\Omega}\underline{\nabla}W \cdot \underline{\nabla} U^{n} dx$
 \end{itemize}
 
 \begin{itemize}
-\item Substitute in linear combination expressions for $\underline{\nabla}W$ and $\underline{\nabla}U^{n}$
+\item <3-> Substitute in linear combination discretizations for $\underline{\nabla}W$ and $\underline{\nabla}U^{n}$
 \end{itemize}
 
-\begin{equation}
+\begin{equation}\onslide<4->
 \sum_{j=1}^{N} \int_{\Omega} \underline{\nabla}\eta_{j} \xi_{j} \cdot \underline{\nabla}\eta_{i} \beta_{i} dx, \texttt{ } i=1,...,N
 \end{equation}
 
-\begin{itemize}
-\item Triangulate $\Omega$ into a finite set of triangular elements $T$ such that $\Omega = \cup_{T \in T_{\Omega}}$ where $T_{\Omega}$ is the triangularization of $\Omega$.
+\begin{itemize}\onslide<5->
+\item Triangulate $\Omega$ into a finite set of triangular elements $T$ such that $\Omega = \cup_{T \in T_{\Omega}}$ where $T_{\Omega}$ is the triangularization of $\Omega$
 \end{itemize}
 
-\begin{itemize}
+\begin{itemize}\onslide<6->
 \item Sum all the contributions from each of the different triangular elements that form each basis function to get
 \end{itemize}
 
-\begin{equation}
+\begin{equation}\onslide<7->
 \sum_{j=1}^{N} \xi_{j}\beta_{i}\sum_{T \in T_{\Omega}}\int_{T} \underline{\nabla} \eta_{j} \cdot \underline{\nabla}\eta_{i} dx, \texttt{ } i=1,...,N
 \end{equation}
+\onslide<8->
 \hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
 \begin{frame}{Building the Linear System}\label{BuildLinearSystem}
-\begin{itemize}
+\begin{itemize}\onslide<1->
 \item Consider the following
 \end{itemize}
 \begin{equation}
 \sum_{j=1}^{N} \xi_{j}\beta_{i}\alert{\sum_{T \in T_{\Omega}}\int_{T} \underline{\nabla} \eta_{j} \cdot \underline{\nabla}\eta_{i} dx}, \texttt{ } i=1,...,N
 \end{equation}
 
-\begin{itemize}
+\begin{itemize}\onslide<2->
 \item Define $\mathbf{A} = \sum_{T \in T_{\Omega}}\int_{T} \underline{\nabla} \eta_{j} \cdot \underline{\nabla}\eta_{i} dx$
 \end{itemize}
 
-\begin{itemize}
+\begin{itemize}\onslide<3->
 \item We can discretize the rest of the weak form using a similar argument where
 \end{itemize}
 
 \footnotesize
-\begin{equation}
+\begin{equation}\onslide<4->
 \underbrace{\int_{\Omega}U^{n}W dx}_{\sum_{j=1}^{N} \xi_{j}\beta_{i}\mathbf{B}} +dtD\underbrace{\int_{\Omega}\underline{\nabla}W \cdot \underline{\nabla} U^{n} dx}_{\sum_{j=1}^{N} \xi_{j}\beta_{i}\mathbf{A}}-dt\underbrace{\int_{\Omega}\left(\underline{v}\cdot \underline{\nabla}U^{n}\right)W dx}_{\sum_{j=1}^{N} \xi_{j}\beta_{i}\mathbf{C}}=dtD\underbrace{\int_{\Gamma_{N}}g^{n}W ds+ \int_{\Omega} U^{n-1}W dx}_{\sum_{j=1}^{N} \beta_{i}\underline{b}}.
 \end{equation}
 
 \normalsize
 for $i=1,...,N$
+\onslide<5->
 \hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
 \begin{frame}{ Mass Matrices, Right-Hand Side, and the Linear System} \label{MassmatRHSLinearSystem}
-\begin{itemize}
+\begin{itemize}\onslide<1->
 \item The expressions for $\mathbf{B}$, $\mathbf{C}$, and $\underline{b}$ are as follows
 \end{itemize}
 
-\begin{equation}
+\begin{equation}\onslide<2->
 \mathbf{B}_{j,i} = \sum_{T \in T_{\Omega}} \int_{T} \eta_{j}\eta_{i} dx.
 \end{equation}
 
-\begin{equation}
+\begin{equation}\onslide<3->
 \mathbf{C}_{j,i} = \sum_{T \in T_{\Omega}}\int_{T}\left(\underline{v}\cdot \underline{\nabla}\eta_{j}\right)\eta_{i} dx.
 \end{equation}
 
-\begin{equation}
+\begin{equation}\onslide<4->
 \underline{b}_{j}=\sum_{E \in \Gamma_{N}} Ddt\int_{E}g^{n}\eta_{j}ds+\mathbf{B}\xi_{j}^{n-1}
 \end{equation}
 
 \begin{itemize}
-\item $\xi_{j}^{n-1} = U^{n-1}\left(x_{j},y_{j}\right)$
-\item $E \rightarrow$ edge on $\Gamma_{N}$
+\item<5-> $\xi_{j}^{n-1} = U^{n-1}\left(x_{j},y_{j}\right)$
+\item<6-> $E \rightarrow$ edge on $\Gamma_{N}$
 \end{itemize}
-
-This gives rise to
-
+\onslide<7->
 \begin{equation}
 \left(\mathbf{B}+dtD\mathbf{A}-dt\mathbf{C}\right)\underline{\xi}^{n}=\underline{b}^{n}.
 \end{equation}
+\onslide<8->
 \hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
 \begin{frame} {Computation of $\mathbf{C}$} \label{ComputationofC}
+\onslide<1->
 The computational techniques use for $\mathbf{A}$, $\mathbf{B}$, and $\underline{b}$ are covered in \cite{50LinesofMATLAB}.
-\begin{itemize}
-\item We will compute $\mathbf{C}$ by first realizing $\underline{v} \cdot \underline{\nabla}\eta_{j}$ is a constant
+\begin{itemize}\onslide<2->
+\item We compute $\mathbf{C}$ by first realizing $\underline{v} \cdot \underline{\nabla}\eta_{j}$ is a constant
 \end{itemize}
-\begin{equation}
+\begin{equation}\onslide<3->
 \mathbf{C}_{j,k} = \underline{v}\cdot \underline{\nabla}\eta_{j}\sum_{T \in T_{\Omega}}\int_{T}\eta_{k} dx.
 \end{equation}
 
-\begin{itemize}
+\begin{itemize}\onslide<4->
 \item When $N$ is sufficiently large, we use a barycentric approximation of the basis functions
 \end{itemize}
 
-\begin{equation}
-\mathbf{C}_{j,k} = \frac{\underline{v}\cdot \underline{\nabla}\eta_{j}}{3}\sum_{T \in T_{\Omega}}\int_{T} dx.
+\begin{equation}\onslide<5->
+\mathbf{C}_{j,k} \approx  \frac{\underline{v}\cdot \underline{\nabla}\eta_{j}}{3}\sum_{T \in T_{\Omega}}\int_{T} dx.
 \end{equation}
 
-\begin{itemize}
+\begin{itemize}\onslide<6->
 \item The integral is just the area of the triangular region that lies flat on the $x$, $y$ plane
 \end{itemize}
 
-\begin{equation}
+\begin{equation}\onslide<7->
  \mathbf{C}_{j,k}\approx \frac{\underline{v}\cdot \underline{\nabla}\eta_{j}}{6}\text{det}\left(\begin{bmatrix}x_{2}-x_{1} & x_{3}-x_{1} \\ y_{2}-y_{1} & y_{3}-y_{1} \end{bmatrix}\right).
 \end{equation}
 where the indices should be understood modulo 3
-
+\onslide<8->
 \hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
 \section{Navier-Stokes Velocity Vector Field}
 \begin{frame} {Implementation of the Navier-Stokes Equations}\label{NavierStokesSlide}
+\onslide<1->
 We will create a finite difference numerical solution to the Navier-Stokes velocity vector field for $\underline{v}$
-
+\onslide<2->
 \begin{itemize}
 \item Consider the following incompressible Navier-Stokes equations
 \end{itemize}
-
+\onslide<3->
 \begin{equation}
 \frac{\partial \underline{v}}{\partial t}+\left(\underline{v}\cdot \nabla \right)\underline{v}-\nu \Delta \underline{v} = \underline{0}
 \end{equation}
 
 \begin{itemize}
-\item MacCormack discretization
-\item Boundary construction using a tolerance scheme
-\item Steady state velocity vector field
+\item<4-> MacCormack discretization
+\item<5-> Boundary construction using a tolerance scheme
+\item<6-> Steady state velocity vector field
 \end{itemize}
+\onslide<7->
 \hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
@@ -338,13 +346,14 @@ We will create a finite difference numerical solution to the Navier-Stokes veloc
 \end{frame}
 
 \begin{frame} {Convergence Testing} \label{ConvergenceTesting}
+\onslide<1->
 \begin{itemize}
 \item Use the Euclidean norm
 \end{itemize}
 \begin{equation}
 \left|\left| \underline{U}^{end}_{dt_{1}}-\underline{U}^{end}_{dt_{2}} \right|\right|
 \end{equation}
-
+\onslide<2->
 \begin{table}
 \centering
 \caption{Convergence Testing for Point Source Model}
@@ -357,7 +366,7 @@ $0.01$ and $0.001$   & $3.3656 \times 10^{-5}$              \\ \hline
 $0.001$ and $0.0001$ & $3.3660 \times 10^{-6}$                                    \\ \hline
 \end{tabular}
 \end{table}
-
+\onslide<3->
 \begin{table}
 \centering
 \caption{Convergence Testing for Constant Source Model}
@@ -370,14 +379,16 @@ $0.01$ and $0.001$   & $2.8262 \times 10^{-5}$              \\ \hline
 $0.001$ and $0.0001$ & $2.8271 \times 10^{-6}$                                      \\ \hline
 \end{tabular}
 \end{table}
+\onslide<4->
 \hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
 \begin{frame}{Conservation of Concentration of Contaminant for Point Source Model} \label{PointConservation}
+\onslide<1->
 \begin{itemize}
 \item Test for conservation of concentration of contaminant in point source model
 \end{itemize}
-
+\onslide<2->
 \begin{figure}   
 \begin{minipage}[b]{0.4\textwidth}
    \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=1\linewidth]{pointconservation.png}
@@ -390,10 +401,11 @@ $0.001$ and $0.0001$ & $2.8271 \times 10^{-6}$                                  
 \end{frame}
 
 \begin{frame}{Increase in Concentration of Contaminant for Constant Source Model}\label{ConstIncrease}
+\onslide<1->
 \begin{itemize}
 \item Test for linear increase in concentration of contaminant in constant source model
 \end{itemize}
-
+\onslide<2->
 \begin{figure} 
 \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=0.5\linewidth]{constincrease.png}
 \end{figure}
@@ -450,12 +462,13 @@ $-10\%$   & $0.0870$              \\ \hline
 
 \begin{frame}{Future Work} \label{FW}
 \begin{itemize}
-\item Use optimized meshing code
-\item Decrease time-step
-\item Avoid using a barycentric approximation of the basis functions
-\item Use a realistic diffusivity and magnitude of velocity
-\item Refine tolerance scheme used to connect finite element code and finite difference code
+\item<1-> Use optimized meshing code
+\item<2->  Decrease time-step
+\item<3->  Avoid using a barycentric approximation of the basis functions
+\item<4->  Use a realistic diffusivity and magnitude of velocity
+\item<5->  Refine tolerance scheme used to connect finite element code and finite difference code
 \end{itemize}
+\onslide<6->
 \hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
