@@ -67,7 +67,7 @@
 
 \section{Purpose}
 
-\begin{frame}{Purpose}
+\begin{frame}{Purpose} \label{Purpose}
 \begin{itemize}
 \item Deepwater Horizon spill of April, 2010
 \item Predictive analysis
@@ -75,10 +75,11 @@
 \item Clean up time
 \item Environmental Protection
 \end{itemize}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
-\section{The Advection-Diffusion Equation}
-\begin{frame}{Advection-Diffusion Equation}
+\section{The Advection-Diffusion Equation} 
+\begin{frame}{Advection-Diffusion Equation}\label{The Advection-Diffusion Equation}
 \begin{equation}
 \frac{\partial u}{\partial t}= D\Delta u + \underline{v} \cdot \underline{\nabla}u+f
 \end{equation}
@@ -90,11 +91,11 @@
 \item $\underline{v} \cdot \underline{\nabla}u \rightarrow$ Advective term
 \item $f \rightarrow$ Forcing function 
 \end{itemize}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
-\section{Implicit Euler and the Weak Form}
 
-\begin{frame}{Implict Euler Step and the Weak Form}
+\begin{frame}{Implict Euler Step and the Weak Form}  \label{EulerandWeak}
 
 \begin{itemize}
 \item Implicit in time Euler Step
@@ -125,11 +126,13 @@ U^{n}-dtD\Delta U^{n}-dt\underline{v}\cdot \underline{\nabla}U^{n}=U^{n-1}.
 \begin{equation}
 \int_{\Omega}U^{n}W dx +dtD\int_{\Omega}\underline{\nabla}W \cdot \underline{\nabla} U^{n} dx-dt\int_{\Omega}\left(\underline{v}\cdot \underline{\nabla}U^{n}\right)W dx=dtD\int_{\Gamma_{N}}g^{n}W ds+ \int_{\Omega} U^{n-1}W dx.
 \end{equation}
-\end{frame}
 \normalsize
+\hyperlink{Questions}{\beamergotobutton{Questions}}
+\end{frame}
+
 
 \section{Application of the Finite Element Method}
-\begin{frame}{Creation of Basis Functions and Finite Element Discretization}
+\begin{frame}{Creation of Basis Functions and Finite Element Discretization} \label{basisfunctionandfinite}
 \begin{itemize}
 \item Define the following basis functions
 \end{itemize}
@@ -154,10 +157,10 @@ W\left(x,y\right)&=&\sum_{j=1}^{N}\beta_{j}\eta_{j}\left(x,y\right), \texttt{ } 
 \item $\xi_{i}=U^{n}\left(x_{i},y_{i}\right)$
 \item $\beta_{j}=W^{n}\left(x_{j},y_{j}\right)$
 \end{itemize}
-
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
-\begin{frame}{Applying the Finite Element Discretizations to the Weak Form}
+\begin{frame}{Applying the Finite Element Discretizations to the Weak Form} \label{applyingFEMtoweakform}
 \begin{itemize}
 \item Consider again
 \end{itemize}
@@ -189,9 +192,10 @@ W\left(x,y\right)&=&\sum_{j=1}^{N}\beta_{j}\eta_{j}\left(x,y\right), \texttt{ } 
 \begin{equation}
 \sum_{j=1}^{N} \xi_{j}\beta_{i}\sum_{T \in T_{\Omega}}\int_{T} \underline{\nabla} \eta_{j} \cdot \underline{\nabla}\eta_{i} dx, \texttt{ } i=1,...,N
 \end{equation}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
-\begin{frame}{Building the Linear System}
+\begin{frame}{Building the Linear System}\label{BuildLinearSystem}
 \begin{itemize}
 \item Consider the following
 \end{itemize}
@@ -214,10 +218,10 @@ W\left(x,y\right)&=&\sum_{j=1}^{N}\beta_{j}\eta_{j}\left(x,y\right), \texttt{ } 
 
 \normalsize
 for $i=1,...,N$
-
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
-\begin{frame}{ Mass Matrices, Right-Hand Side, and Linear System,}
+\begin{frame}{ Mass Matrices, Right-Hand Side, and the Linear System} \label{MassmatRHSLinearSystem}
 \begin{itemize}
 \item The expressions for $\mathbf{B}$, $\mathbf{C}$, and $\underline{b}$ are as follows
 \end{itemize}
@@ -244,10 +248,10 @@ This gives rise to
 \begin{equation}
 \left(\mathbf{B}+dtD\mathbf{A}-dt\mathbf{C}\right)\underline{\xi}^{n}=\underline{b}^{n}.
 \end{equation}
-
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
-\begin{frame} {Computation of $\mathbf{C}$}
+\begin{frame} {Computation of $\mathbf{C}$} \label{ComputationofC}
 The computational techniques use for $\mathbf{A}$, $\mathbf{B}$, and $\underline{b}$ are covered in \cite{50LinesofMATLAB}.
 \begin{itemize}
 \item We will compute $\mathbf{C}$ by first realizing $\underline{v} \cdot \underline{\nabla}\eta_{j}$ is a constant
@@ -273,11 +277,11 @@ The computational techniques use for $\mathbf{A}$, $\mathbf{B}$, and $\underline
 \end{equation}
 where the indices should be understood modulo 3
 
-
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
 \section{Navier-Stokes Velocity Vector Field}
-\begin{frame} {Implementation of the Navier-Stokes Equations}
+\begin{frame} {Implementation of the Navier-Stokes Equations}\label{NavierStokesSlide}
 We will create a finite difference numerical solution to the Navier-Stokes velocity vector field for $\underline{v}$
 
 \begin{itemize}
@@ -293,23 +297,24 @@ We will create a finite difference numerical solution to the Navier-Stokes veloc
 \item Boundary construction using a tolerance scheme
 \item Steady state velocity vector field
 \end{itemize}
-
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
-\begin{frame} {Steady State Solution to the Navier-Stokes Equations}
+\begin{frame} {Steady State Solution to the Navier-Stokes Equations} \label{NavierStokesSteadyState}
 
 \begin{figure}
 \centering   
    \includegraphics[width=0.6\linewidth]{steadystatenavierstokes.png}
    
 \end{figure}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
 
 
 \section{Results}
 
-\begin{frame}{Point Source Model}
+\begin{frame}{Point Source Model} \label{PointSourceModelResults}
   
 %\begin{figure}[ht!]
 %\begin{centering}
@@ -317,10 +322,11 @@ We will create a finite difference numerical solution to the Navier-Stokes veloc
     %  width=4in]{20}{mathpointani_img_}{1}{2301}
 %\end{centering}
   %  \end{figure}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
 
-\begin{frame}{Constant Source Model}
+\begin{frame}{Constant Source Model} \label{ConstantSourceModelResults}
   
 %\begin{figure}[ht!]
 %begin{centering}
@@ -328,16 +334,162 @@ We will create a finite difference numerical solution to the Navier-Stokes veloc
  %     width=4in]{20}{mathconstani_img_}{1}{5601}
 %\end{centering}
     %\end{figure}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
-\begin{frame} {Convergence Testing}
+\begin{frame} {Convergence Testing} \label{ConvergenceTesting}
+\begin{itemize}
+\item Use the Euclidean norm
+\end{itemize}
+\begin{equation}
+\left|\left| \underline{U}^{end}_{dt_{1}}-\underline{U}^{end}_{dt_{2}} \right|\right|
+\end{equation}
 
+\begin{table}
+\centering
+\caption{Convergence Testing for Point Source Model}
+
+\begin{tabular}{|l|l|}
+\hline
+Time Steps           & Euclidean Distance Between Numerical Solutions \\ \hline
+$0.1$ and $0.01$     & $3.3623 \times 10^{-4}$              \\ \hline
+$0.01$ and $0.001$   & $3.3656 \times 10^{-5}$              \\ \hline
+$0.001$ and $0.0001$ & $3.3660 \times 10^{-6}$                                    \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\caption{Convergence Testing for Constant Source Model}
+
+\begin{tabular}{|l|l|}
+\hline
+Time Steps           & Euclidean Distance Between Numerical Solutions \\ \hline
+$0.1$ and $0.01$     & $2.8178 \times 10^{-4}$              \\ \hline
+$0.01$ and $0.001$   & $2.8262 \times 10^{-5}$              \\ \hline
+$0.001$ and $0.0001$ & $2.8271 \times 10^{-6}$                                      \\ \hline
+\end{tabular}
+\end{table}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
 \end{frame}
 
-\begin{frame}{Frame Title}
+\begin{frame}{Conservation of Concentration of Contaminant for Point Source Model} \label{PointConservation}
+\begin{itemize}
+\item Test for conservation of concentration of contaminant in point source model
+\end{itemize}
+
+\begin{figure}   
+\begin{minipage}[b]{0.4\textwidth}
+   \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=1\linewidth]{pointconservation.png}
+\end{minipage}
+ \begin{minipage}[b]{0.4\textwidth}
+   \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=1\linewidth]{derivpointconservation.png}
+\end{minipage}
+\end{figure}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
+\end{frame}
+
+\begin{frame}{Increase in Concentration of Contaminant for Constant Source Model}\label{ConstIncrease}
+\begin{itemize}
+\item Test for linear increase in concentration of contaminant in constant source model
+\end{itemize}
+
+\begin{figure} 
+\includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=0.5\linewidth]{constincrease.png}
+\end{figure}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
+\end{frame}
+
+\section{Sensitivity Analyses}
+
+\begin{frame}{Graphical Sensitivity} \label{Graphical Sensitivity}
+
+\begin{figure}   
+\begin{minipage}[b]{0.4\textwidth}
+   \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=1\linewidth]{sensepoint.png}
+\begin{center}
+\caption{Point Source Model Sensitivity}
+\end{center}
+\end{minipage}
+ \begin{minipage}[b]{0.4\textwidth}
+   \includegraphics[trim=0mm 0mm 0mm 0mm,clip,width=1\linewidth]{senseconst.png}
+\begin{center}
+\caption{Constant Source Model Sensitivity}
+\end{center}
+\end{minipage}
+\end{figure}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
+\end{frame}
+
+\begin{frame}{Sensitivity at a Time Step}\label{Sensitivity at time step}
+
+\begin{table}
+\caption{Sensitivity Point Source Model at $n=1900$}
+\begin{tabular}{|l|l|}
+\hline
+Change in Diffusivity $D$          & $S$ \\ \hline
+$+10\%$    & $-0.0773$              \\ \hline
+$-10\%$   & $0.0646$              \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\caption{Sensitivity Constant Source Model at $n=5900$}
+\begin{tabular}{|l|l|}
+\hline
+Change in Diffusivity $D$           & $S$ \\ \hline
+$+10\%$    & $-0.0893$              \\ \hline
+$-10\%$   & $0.0870$              \\ \hline
+\end{tabular}
+\end{table}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}{Future Work} \label{FW}
+\begin{itemize}
+\item Use optimized meshing code
+\item Decrease time-step
+\item Avoid using a barycentric approximation of the basis functions
+\item Use a realistic diffusivity and magnitude of velocity
+\item Refine tolerance scheme used to connect finite element code and finite difference code
+\end{itemize}
+\hyperlink{Questions}{\beamergotobutton{Questions}}
+\end{frame}
+
+\begin{frame}{Thank you}
     \begin{center}
         {\bf Thank you!}
     \end{center}
+\end{frame}
+
+\begin{frame}{Questions}\label{Questions}
+    %\begin{center}
+        %{\bf Questions?}
+\begin{itemize}
+\item \hyperlink{Purpose}{\beamergotobutton{Purpose}}
+\item\hyperlink{The Advection-Diffusion Equation}{\beamergotobutton{The Advection-Diffusion Equation}}
+\item \hyperlink{EulerandWeak}{\beamergotobutton{Implict Euler Step and the Weak Form}}
+\item\hyperlink{basisfunctionandfinite}{\beamergotobutton{Creation of Basis Functions and Finite Element Discretization}}
+\item\hyperlink{applyingFEMtoweakform}{\beamergotobutton{Applying the Finite Element Discretizations to the Weak Form}}
+\item\hyperlink{BuildLinearSystem}{\beamergotobutton{Building the Linear System}}
+\item\hyperlink{MassmatRHSLinearSystem}{\beamergotobutton{Mass Matrices, Right-Hand Side, and the Linear System}}
+\item\hyperlink{ComputationofC}{\beamergotobutton{Computation of $\mathbf{C}$}}
+\item\hyperlink{NavierStokesSlide}{\beamergotobutton{Implementation of the Navier-Stokes Equations}}
+\item\hyperlink{NavierStokesSteadyState}{\beamergotobutton{Steady State Solution to the Navier-Stokes Equations}}
+\item\hyperlink{PointSourceModelResults}{\beamergotobutton{Point Source Model}}
+\item\hyperlink{ConstantSourceModelResults}{\beamergotobutton{Constant Source Model}}
+\item\hyperlink{ConvergenceTesting}{\beamergotobutton{Convergence Testing}}
+\item\hyperlink{PointConservation}{\beamergotobutton{Conservation of Concentration of Contaminant for Point Source Model}}
+\item\hyperlink{ConstIncrease}{\beamergotobutton{Increase in Concentration of Contaminant for Constant Source Model}}
+\item\hyperlink{Graphical Sensitivity}{\beamergotobutton{Graphical Sensitivity}}
+\item\hyperlink{Sensitivity at time step}{\beamergotobutton{Sensitivity at a Time Step}}
+\item\hyperlink{FW}{\beamergotobutton{Future Work}}
+\item\hyperlink{Questions}{\beamergotobutton{Questions}}
+\end{itemize}
+    %\end{center}
 \end{frame}
 
 \begin{frame}{Works Cited}
